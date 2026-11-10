@@ -1,0 +1,94 @@
+{
+  "image": "VHS.jpeg",
+  "image_size": [
+    900,
+    1600
+  ],
+  "depth_model": "lpiccinelli/unidepth-v2-vits14",
+  "seg_model": "yolo11m-seg.pt",
+  "intrinsics": [
+    [
+      987.2515869140625,
+      0.0,
+      454.35089111328125
+    ],
+    [
+      0.0,
+      998.6450805664062,
+      801.698486328125
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "intrinsics_source": "predicted",
+  "timings": {
+    "segmentation_s": 0.667,
+    "depth_s": 0.446
+  },
+  "num_people": 3,
+  "people": [
+    {
+      "id": "P1",
+      "distance_m": 2.478,
+      "z_depth_m": 2.329,
+      "detection_conf": 0.935,
+      "bbox_xyxy": [
+        585,
+        319,
+        875,
+        1137
+      ],
+      "mask_area_px": 154141,
+      "pixels_used": 144312,
+      "color_bgr": [
+        255,
+        101,
+        38
+      ],
+      "low_reliability": false
+    },
+    {
+      "id": "P2",
+      "distance_m": 2.995,
+      "z_depth_m": 2.821,
+      "detection_conf": 0.941,
+      "bbox_xyxy": [
+        37,
+        298,
+        299,
+        1054
+      ],
+      "mask_area_px": 129878,
+      "pixels_used": 120522,
+      "color_bgr": [
+        38,
+        255,
+        164
+      ],
+      "low_reliability": false
+    },
+    {
+      "id": "P3",
+      "distance_m": 3.35,
+      "z_depth_m": 3.314,
+      "detection_conf": 0.891,
+      "bbox_xyxy": [
+        377,
+        394,
+        540,
+        1013
+      ],
+      "mask_area_px": 72633,
+      "pixels_used": 63864,
+      "color_bgr": [
+        227,
+        38,
+        255
+      ],
+      "low_reliability": false
+    }
+  ]
+}

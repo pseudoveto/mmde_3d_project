@@ -1,0 +1,94 @@
+{
+  "image": "3DTeamjpeg.jpeg",
+  "image_size": [
+    1200,
+    1600
+  ],
+  "depth_model": "lpiccinelli/unidepth-v2-vits14",
+  "seg_model": "yolo11m-seg.pt",
+  "intrinsics": [
+    [
+      1184.4561767578125,
+      0.0,
+      600.4680786132812
+    ],
+    [
+      0.0,
+      1186.7718505859375,
+      802.1893920898438
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "intrinsics_source": "predicted",
+  "timings": {
+    "segmentation_s": 0.664,
+    "depth_s": 0.411
+  },
+  "num_people": 3,
+  "people": [
+    {
+      "id": "P1",
+      "distance_m": 2.921,
+      "z_depth_m": 2.785,
+      "detection_conf": 0.888,
+      "bbox_xyxy": [
+        841,
+        558,
+        1043,
+        1182
+      ],
+      "mask_area_px": 84010,
+      "pixels_used": 75939,
+      "color_bgr": [
+        255,
+        101,
+        38
+      ],
+      "low_reliability": false
+    },
+    {
+      "id": "P2",
+      "distance_m": 3.639,
+      "z_depth_m": 3.457,
+      "detection_conf": 0.908,
+      "bbox_xyxy": [
+        133,
+        587,
+        305,
+        1054
+      ],
+      "mask_area_px": 56799,
+      "pixels_used": 50919,
+      "color_bgr": [
+        38,
+        255,
+        164
+      ],
+      "low_reliability": false
+    },
+    {
+      "id": "P3",
+      "distance_m": 4.239,
+      "z_depth_m": 4.213,
+      "detection_conf": 0.533,
+      "bbox_xyxy": [
+        646,
+        650,
+        777,
+        872
+      ],
+      "mask_area_px": 21871,
+      "pixels_used": 18797,
+      "color_bgr": [
+        227,
+        38,
+        255
+      ],
+      "low_reliability": false
+    }
+  ]
+}
