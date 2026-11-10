@@ -1,0 +1,29 @@
+# Install order (see README):
+#   1) PyTorch for your platform/CUDA
+#   2) pip install --no-deps "unidepth @ git+https://github.com/lpiccinelli-eth/UniDepth.git"
+#      (its own requirements pin triton/xformers, which have no Windows/CPU wheels and are optional)
+#   3) pip install -r requirements.txt
+
+# UniDepth runtime dependencies
+einops>=0.7
+huggingface-hub>=0.22
+timm
+safetensors
+scipy
+opencv-python
+wandb
+h5py
+tables
+tabulate
+termcolor
+tqdm
+imageio
+trimesh
+
+# Demo app
+gradio>=4.44,<6
+plotly>=5.20
+matplotlib>=3.8
+pandas>=2.0
+numpy>=2.0
+pillow>=10.2
