@@ -1,0 +1,232 @@
+<?xml version="1.0" ?>
+<sdf version="1.8">
+  <world name="room_world">
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics" />
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands" />
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster" />
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+
+    <!-- Scene Lighting: High ambient + directional + point lights to eliminate pitch-black shadows -->
+    <scene>
+      <ambient>0.45 0.45 0.45 1.0</ambient>
+      <background>0.1 0.1 0.1 1.0</background>
+      <shadows>true</shadows>
+      <grid>false</grid>
+    </scene>
+
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>5.0 0 2.65 0 0.8 0</pose>
+      <diffuse>0.6 0.6 0.58 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <direction>-0.5 0.1 -0.85</direction>
+    </light>
+
+    <light type="point" name="room_light_front">
+      <cast_shadows>false</cast_shadows>
+      <pose>3.0 0.0 2.5 0 0 0</pose>
+      <diffuse>0.5 0.48 0.45 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <attenuation>
+        <range>12</range>
+        <constant>0.4</constant>
+        <linear>0.05</linear>
+        <quadratic>0.01</quadratic>
+      </attenuation>
+    </light>
+
+    <light type="point" name="room_light_back">
+      <cast_shadows>false</cast_shadows>
+      <pose>7.5 0.0 2.5 0 0 0</pose>
+      <diffuse>0.5 0.48 0.45 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <attenuation>
+        <range>12</range>
+        <constant>0.4</constant>
+        <linear>0.05</linear>
+        <quadratic>0.01</quadratic>
+      </attenuation>
+    </light>
+
+    <!-- Room Geometry -->
+    <model name="room_enclosure">
+      <static>true</static>
+      
+      <!-- Floor: 10m x 6m at z=0 -->
+      <link name="floor">
+        <pose>5.0 0.0 -0.05 0 0 0</pose>
+        <collision name="col">
+          <geometry><box><size>10.0 6.0 0.1</size></box></geometry>
+        </collision>
+        <visual name="vis">
+          <geometry><box><size>10.0 6.0 0.1</size></box></geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>materials/textures/wood_floor.png</albedo_map>
+                <roughness>0.4</roughness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+
+      <!-- Ceiling: 10m x 6m at z=2.7m -->
+      <link name="ceiling">
+        <pose>5.0 0.0 2.75 0 0 0</pose>
+        <collision name="col">
+          <geometry><box><size>10.0 6.0 0.1</size></box></geometry>
+        </collision>
+        <visual name="vis">
+          <geometry><box><size>10.0 6.0 0.1</size></box></geometry>
+          <material>
+            <ambient>0.9 0.9 0.9 1</ambient>
+            <diffuse>0.9 0.9 0.9 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>materials/textures/plaster_ceiling.png</albedo_map>
+                <roughness>0.9</roughness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+
+      <!-- Back Wall (Behind Camera): x = -0.5 -->
+      <link name="wall_back">
+        <pose>-0.5 0.0 1.35 0 0 0</pose>
+        <collision name="col">
+          <geometry><box><size>0.2 6.0 2.7</size></box></geometry>
+        </collision>
+        <visual name="vis">
+          <geometry><box><size>0.2 6.0 2.7</size></box></geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>materials/textures/brick_wall.png</albedo_map>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+
+      <!-- Far Wall (Front of Camera): x = 10.0 -->
+      <link name="wall_front">
+        <pose>10.1 0.0 1.35 0 0 0</pose>
+        <collision name="col">
+          <geometry><box><size>0.2 6.0 2.7</size></box></geometry>
+        </collision>
+        <visual name="vis">
+          <geometry><box><size>0.2 6.0 2.7</size></box></geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>materials/textures/brick_wall.png</albedo_map>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+
+      <!-- Left Wall: y = 3.0 -->
+      <link name="wall_left">
+        <pose>5.0 3.1 1.35 0 0 0</pose>
+        <collision name="col">
+          <geometry><box><size>10.0 0.2 2.7</size></box></geometry>
+        </collision>
+        <visual name="vis">
+          <geometry><box><size>10.0 0.2 2.7</size></box></geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>materials/textures/brick_wall.png</albedo_map>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+
+      <!-- Right Wall: y = -3.0 -->
+      <link name="wall_right">
+        <pose>5.0 -3.1 1.35 0 0 0</pose>
+        <collision name="col">
+          <geometry><box><size>10.0 0.2 2.7</size></box></geometry>
+        </collision>
+        <visual name="vis">
+          <geometry><box><size>10.0 0.2 2.7</size></box></geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>materials/textures/brick_wall.png</albedo_map>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Benchmarking Camera Rig (Fixed at (0, 0, 1.0), looking +X) -->
+    <model name="camera_rig">
+      <static>true</static>
+      <pose>0.0 0.0 1.0 0 0 0</pose>
+      <link name="camera_optical_frame">
+        
+        <!-- RGB Camera Sensor -->
+        <sensor name="camera_rgb" type="camera">
+          <topic>/camera/rgb/image_raw</topic>
+          <update_rate>10.0</update_rate>
+          <always_on>1</always_on>
+          <camera>
+            <horizontal_fov>1.57079632679</horizontal_fov>
+            <image>
+              <width>640</width>
+              <height>480</height>
+              <format>R8G8B8</format>
+            </image>
+            <clip>
+              <near>0.08</near>
+              <far>20.0</far>
+            </clip>
+          </camera>
+        </sensor>
+
+        <!-- Ground-Truth Depth Camera Sensor (Co-located, Identical Intrinsics) -->
+        <sensor name="camera_depth" type="depth_camera">
+          <topic>/camera/depth/image_raw</topic>
+          <update_rate>10.0</update_rate>
+          <always_on>1</always_on>
+          <camera>
+            <horizontal_fov>1.57079632679</horizontal_fov>
+            <image>
+              <width>640</width>
+              <height>480</height>
+              <format>R_FLOAT32</format>
+            </image>
+            <clip>
+              <near>0.08</near>
+              <far>20.0</far>
+            </clip>
+          </camera>
+        </sensor>
+      </link>
+    </model>
+
+  </world>
+</sdf>
